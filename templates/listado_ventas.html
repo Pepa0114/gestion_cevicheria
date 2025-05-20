@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="mb-0">🛒 Listado de Ventas</h2>
+    <a href="{{ url_for('listado_ventas') }}" class="btn btn-info btn-refresh" title="Actualizar lista">
+      🔄 Refrescar
+    </a>
+  </div>
+
+  <div class="table-responsive shadow-sm rounded">
+    <table class="table table-hover table-striped align-middle">
+      <thead class="table-primary">
+        <tr>
+          <th>📅 Fecha</th>
+          <th>📦 Producto</th>
+          <th>💵 Monto (S/)</th>
+          <th>💳 Método de Pago</th>
+          <th>⚙️ Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for venta in ventas %}
+        <tr>
+          <td>{{ venta.fecha.strftime('%d/%m/%Y') }}</td>
+          <td>{{ venta.producto }}</td>
+          <td class="text-success fw-semibold">S/ {{ venta.monto | round(2) }}</td>
+          <td>
+            {% if venta.metodo_pago == 'Efectivo' %}
+              💵 Efectivo
+            {% elif venta.metodo_pago == 'Yape' %}
+              📱 Yape
+            {% elif venta.metodo_pago == 'Izipay' %}
+              💳 Izipay
+            {% else %}
+              {{ venta.metodo_pago }}
+            {% endif %}
+          </td>
+          <td>
+            <a href="{{ url_for('editar_venta', venta_id=venta.id) }}" class="btn btn-sm btn-outline-primary me-1" title="Editar venta">✏️</a>
+            <a href="{{ url_for('eliminar_venta', venta_id=venta.id) }}" class="btn btn-sm btn-outline-danger" onclick="return confirm('¿Estás seguro de eliminar esta venta?');" title="Eliminar venta">🗑️</a>
+          </td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="5" class="text-center text-muted fst-italic">No hay ventas registradas aún. 💤</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

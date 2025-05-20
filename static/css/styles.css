@@ -1,0 +1,518 @@
+
+/* VARIABLES CSS */
+:root {
+  /* Colores principales */
+  --color-primary: #1a237e;
+  --color-secondary: #0b2447;
+  --color-accent: #ff7043;
+  --color-accent-light: #ffa726;
+  --color-text: #222222;
+  --color-bg: linear-gradient(135deg, #fffdfa 0%, #cceeff 100%);
+  --color-white: #fffefc;
+  --color-alert: #d84315;
+
+  /* Colores para estados */
+  --color-positive: #2e7d32;  /* Verde profesional */
+  --color-negative: #dc3545;  /* Rojo */
+
+  /* Tipografía */
+  --font-main: 'Inter', sans-serif;
+  --font-headings: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* RESET Y ESTILOS BASE */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-main);
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  padding-bottom: 70px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* BARRA DE NAVEGACIÓN */
+.navbar {
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-light));
+  border-radius: 0 0 1rem 1rem;
+  box-shadow: 0 4px 15px rgba(255, 112, 67, 0.6);
+  padding: 0.8rem 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar:hover {
+  box-shadow: 0 6px 20px rgba(255, 112, 67, 0.8);
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: var(--color-secondary);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  letter-spacing: 1.2px;
+  font-family: var(--font-headings);
+  user-select: none;
+}
+
+/* BOTONES CONSISTENTES Y MODERNOS */
+.btn {
+  display: inline-block;
+  font-weight: 700;
+  border-radius: 50px;
+  padding: 0.6rem 1.8rem;
+  background: var(--color-secondary);
+  color: white;
+  box-shadow: 0 6px 18px rgba(11, 36, 71, 0.45);
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  font-size: 1rem;
+  letter-spacing: 0.03em;
+  will-change: transform;
+}
+
+.btn:hover,
+.btn:focus {
+  background: #08315c;
+  box-shadow: 0 10px 30px rgba(8, 49, 92, 0.7);
+  transform: translateY(-4px) scale(1.05);
+  outline: none;
+}
+
+.btn:active {
+  transform: translateY(-1px) scale(0.98);
+  box-shadow: 0 5px 15px rgba(8, 49, 92, 0.5);
+}
+
+/* Botón outline elegante */
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--color-secondary);
+  color: var(--color-secondary);
+  font-weight: 700;
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 50px;
+  padding: 0.6rem 1.8rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.btn-outline:hover,
+.btn-outline:focus {
+  background: var(--color-secondary);
+  color: white;
+  box-shadow: 0 8px 25px rgba(11, 36, 71, 0.55);
+  transform: translateY(-3px) scale(1.03);
+  outline: none;
+}
+
+.btn-outline:active {
+  transform: translateY(-1px) scale(0.97);
+  box-shadow: 0 5px 15px rgba(11, 36, 71, 0.4);
+}
+
+/* Botón refresh integrado */
+.btn-refresh {
+  background: var(--color-secondary);
+  color: white;
+  padding: 0.5rem 1.3rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  border: none;
+  box-shadow: 0 6px 15px rgba(11, 36, 71, 0.5);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  user-select: none;
+  font-size: 0.95rem;
+  will-change: transform;
+}
+
+.btn-refresh:hover,
+.btn-refresh:focus {
+  background-color: #08315c;
+  color: white;
+  transform: rotate(20deg) translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(8, 49, 92, 0.7);
+  outline: none;
+}
+
+.btn-refresh:active {
+  transform: rotate(0deg) translateY(-1px) scale(0.98);
+  box-shadow: 0 5px 15px rgba(8, 49, 92, 0.5);
+}
+
+/* TARJETAS */
+.card {
+  background: var(--color-white);
+  padding: 2rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 15px 40px rgba(255, 112, 67, 0.15);
+  margin-bottom: 2rem;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  border: 1px solid rgba(255, 226, 204, 0.5);
+  animation: fadeInUp 0.7s ease forwards;
+  will-change: transform, box-shadow;
+}
+
+.card:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 25px 60px rgba(255, 112, 67, 0.28);
+}
+
+/* FORMULARIOS */
+.form-container {
+  max-width: 700px;
+  margin: 2rem auto;
+  background: var(--color-white);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  animation: fadeInUp 0.7s ease forwards;
+  user-select: none;
+}
+
+.form-group {
+  margin-bottom: 1.6rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.75rem 1.1rem;
+  border: 2px solid #90caf9;
+  border-radius: 0.7rem;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  font-family: var(--font-main);
+  color: var(--color-text);
+}
+
+.form-control:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 12px rgba(26, 35, 126, 0.5);
+  outline: none;
+}
+
+/* Botón submit */
+.form-submit {
+  display: block;
+  width: 100%;
+  padding: 0.85rem;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 0.7rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-size: 1.1rem;
+  user-select: none;
+}
+
+.form-submit:hover,
+.form-submit:focus {
+  background: #283593;
+  transform: translateY(-3px) scale(1.03);
+  outline: none;
+}
+
+.form-submit:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+/* TABLAS */
+.table-responsive {
+  border-radius: 0.8rem;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin: 1.5rem 0;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-headings);
+}
+
+.table thead {
+  background: var(--color-primary);
+  color: white;
+}
+
+.table th, .table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+  transition: background-color 0.3s ease;
+}
+
+.table tbody tr {
+  transition: background-color 0.3s ease;
+  cursor: default;
+}
+
+.table tbody tr:hover {
+  background: #f5f5f5;
+}
+
+/* ALERTAS Y MENSAJES */
+.alert {
+  padding: 1rem 1.2rem;
+  border-radius: 0.8rem;
+  background: #fff0eb;
+  color: var(--color-alert);
+  margin: 1rem 0;
+  box-shadow: 0 4px 12px rgba(216, 67, 21, 0.12);
+  user-select: none;
+}
+
+/* FOOTER */
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: rgba(255, 244, 241, 0.85);
+  padding: 0.8rem 1rem;
+  border-radius: 1rem 1rem 0 0;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--color-secondary);
+  font-weight: 600;
+  user-select: none;
+  box-shadow: 0 -4px 10px rgba(255, 112, 67, 0.15);
+}
+
+/* ANIMACIONES */
+@keyframes fadeInUp {
+from {
+opacity: 0;
+transform: translateY(20px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+/* UTILS */
+.text-center {
+text-align: center;
+}
+
+.mt-2 {
+margin-top: 0.75rem;
+}
+
+.mb-3 {
+margin-bottom: 1rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+.navbar {
+flex-direction: column;
+padding: 1rem;
+}
+.btn {
+width: 100%;
+margin-bottom: 0.8rem;
+}
+.form-container {
+padding: 1.5rem;
+}
+}
+.form-container {
+  max-width: 500px;
+  margin: 1.5rem auto;
+  padding: 1.5rem 2rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.form-title {
+  text-align: center;
+  color: var(--color-danger);
+  margin-bottom: 1.8rem;
+  font-weight: 700;
+  font-size: 1.7rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label {
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: #333;
+}
+
+.form-control, .form-select {
+  padding: 0.5rem 0.8rem;
+  border: 1.5px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+  outline: none;
+  border-color: var(--color-danger);
+  box-shadow: 0 0 8px rgba(220, 53, 69, 0.4);
+}
+
+.form-submit-wrapper {
+  text-align: center;
+  margin-top: 1.6rem;
+}
+/* Todo igual, solo este estilo para flex:1  */
+.form-row .form-group[style] {
+  flex: 1;
+}
+
+
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--color-texto);
+  background-color: var(--color-fondo);
+  margin: 1rem;
+}
+
+h2 {
+  color: var(--color-principal);
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.table-responsive {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(44, 62, 80, 0.15);
+  overflow-x: auto;
+  padding: 1rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+thead tr {
+  background-color: var(--color-secundario);
+  color: white;
+  font-weight: 600;
+}
+
+tbody tr {
+  border-bottom: 1px solid #ddd;
+  transition: background-color 0.3s ease;
+}
+
+tbody tr:hover {
+  background-color: var(--color-hover);
+  color: white;
+  cursor: pointer;
+}
+
+tbody tr td {
+  padding: 0.6rem 1rem;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.text-success {
+  color: var(--color-exito) !important;
+  font-weight: 700;
+}
+
+.text-danger {
+  color: var(--color-error) !important;
+  font-weight: 700;
+}
+
+/* Etiquetas tipo con colores suaves */
+td:nth-child(2) {
+  font-weight: 600;
+}
+
+td:nth-child(2):contains('Ingreso') {
+  color: var(--color-exito);
+}
+
+td:nth-child(2):contains('Gasto') {
+  color: var(--color-error);
+}
+
+/* Iconos de método */
+td:nth-child(4) {
+  font-weight: 500;
+  color: var(--color-principal);
+}
+
+/* Cuando no hay datos */
+tbody tr td[colspan="5"] {
+  color: #7f8c8d;
+  font-style: italic;
+  padding: 2rem;
+}
+
+
+.menu {
+  border: 2px solid #4caf50; /* Contorno verde */
+  width: 40px;
+  height: 30px;
+  padding: 5px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 5px; /* Bordes redondeados */
+}
+
+.menu div {
+  background-color: #4caf50; /* Color verde para las rayas */
+  height: 4px;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+/* Cambia el color de las rayas del ícono del botón hamburguesa */
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23000080' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+/* Cambia el borde (contorno) del botón hamburguesa */
+.navbar-toggler {
+  border: 2px solid #000080;
+  border-radius: 5px;
+}

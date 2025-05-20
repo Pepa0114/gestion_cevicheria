@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="mb-0">📋 Listado de Gastos</h2>
+    <a href="{{ url_for('listado_gastos') }}" class="btn btn-info btn-refresh" title="Actualizar lista">
+      🔄 Refrescar
+    </a>
+  </div>
+
+  <div class="table-responsive shadow-sm rounded">
+    <table class="table table-hover table-striped align-middle">
+      <thead class="table-primary">
+        <tr>
+          <th>📅 Fecha</th>
+          <th>📝 Descripción</th>
+          <th>💰 Monto (S/)</th>
+          <th>💳 Método de Pago</th>
+          <th>🗂️ Categoría</th>
+          <th>⚙️ Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for gasto in gastos %}
+        <tr>
+          <td>{{ gasto.fecha.strftime('%d/%m/%Y') }}</td>
+          <td>{{ gasto.descripcion }}</td>
+          <td class="text-success fw-semibold">S/ {{ gasto.monto | round(2) }}</td>
+          <td>
+            {% if gasto.metodo_pago == 'Efectivo' %}
+              💵 Efectivo
+            {% elif gasto.metodo_pago == 'Yape' %}
+              📱 Yape
+            {% elif gasto.metodo_pago == 'Izipay' %}
+              💳 Izipay
+            {% else %}
+              {{ gasto.metodo_pago }}
+            {% endif %}
+          </td>
+          <td>{{ gasto.categoria }}</td>
+          <td>
+            <a href="{{ url_for('editar_gasto', gasto_id=gasto.id) }}" class="btn btn-sm btn-outline-primary me-1" title="Editar gasto">✏️</a>
+            <a href="{{ url_for('eliminar_gasto', gasto_id=gasto.id) }}" class="btn btn-sm btn-outline-danger" onclick="return confirm('¿Estás seguro de eliminar este gasto?');" title="Eliminar gasto">🗑️</a>
+          </td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="6" class="text-center text-muted fst-italic">No hay gastos registrados aún. 💤</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

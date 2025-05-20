@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>📊 Registro de Transacciones</h2>
+  
+  <div class="table-responsive shadow-sm rounded">
+    <table class="table table-striped table-hover align-middle">
+      <thead class="table-primary">
+        <tr>
+          <th>📅 Fecha</th>
+          <th>🔖 Tipo</th>
+          <th>💰 Monto (S/.)</th>
+          <th>💳 Método</th>
+          <th>🏷️ Categoría</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in registros %}
+          <tr>
+            <td>{{ r.fecha.strftime('%Y-%m-%d') }}</td>
+            <td>
+              {% if r.tipo == 'Ingreso' %}
+                🟢 {{ r.tipo }}
+              {% elif r.tipo == 'Gasto' %}
+                🔴 {{ r.tipo }}
+              {% else %}
+                {{ r.tipo }}
+              {% endif %}
+            </td>
+            <td class="{% if r.tipo == 'Ingreso' %}text-success{% elif r.tipo == 'Gasto' %}text-danger{% endif %} fw-semibold">
+              S/. {{ '%.2f'|format(r.monto) }}
+            </td>
+            <td>
+              {% if r.metodo == 'Efectivo' %}
+                💵 {{ r.metodo }}
+              {% elif r.metodo == 'Yape' %}
+                📱 {{ r.metodo }}
+              {% elif r.metodo == 'Izipay' %}
+                💳 {{ r.metodo }}
+              {% else %}
+                {{ r.metodo }}
+              {% endif %}
+            </td>
+            <td>{{ r.categoria or '-' }}</td>
+          </tr>
+        {% else %}
+          <tr>
+            <td colspan="5" class="text-center text-muted fst-italic">No hay transacciones registradas aún. 💤</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

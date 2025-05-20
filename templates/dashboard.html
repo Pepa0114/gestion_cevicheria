@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="alert alert-info text-center shadow-sm py-3 fs-5 rounded-3">
+  <h4>Total disponible: <strong>S/. {{ total_dinero | round(2) }}</strong></h4>
+</div>
+
+<div class="row mb-5 g-4">
+  {% for s in saldos %}
+    <div class="col-12 col-sm-6 col-md-4">
+      <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-header bg-primary text-white fw-semibold rounded-top">
+          {{ s.metodo_pago }}
+        </div>
+        <div class="card-body text-center">
+          <h5 class="card-title fs-3 fw-bold text-primary">S/. {{ '%.2f' | format(s.saldo) }}</h5>
+          <p class="card-text text-muted fst-italic small">
+            Inicial: S/. {{ '%.2f' | format(s.monto_inicial) }}
+          </p>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <ul class="list-group shadow rounded-4 overflow-hidden">
+      <li class="list-group-item bg-primary text-white fs-5 fw-semibold text-center">
+        Totales Mes
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Ventas
+        <span class="badge bg-success rounded-pill fs-6">
+          S/. {{ ventas | sum(attribute='monto') | round(2) }}
+        </span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Gastos
+        <span class="badge bg-danger rounded-pill fs-6">
+          S/. {{ gastos | sum(attribute='monto') | round(2) }}
+        </span>
+      </li>
+    </ul>
+  </div>
+</div>
+{% endblock %}
